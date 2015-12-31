@@ -56,10 +56,12 @@ int main(int argc, char* argv[]) {
     printf("argc=%d\n", argc);
     Uint8 sig[16] = {0};
     if (argc>1) {
-        z_md5(argv[1], sig);
+        printf("argv[1] len=%d\n", strlen(argv[1]));
+        z_md5(argv[1], strlen(argv[1]), sig);
     } else {
+        printf("using input from stdin\n");
         size_t in_size = 512;
-        char *inputs = malloc(in_size+1);
+        char *inputs = malloc(in_size);
         if (!inputs) {
             zlog("fail to alloc %u bytes\n", in_size);
             exit(1);
@@ -78,8 +80,7 @@ int main(int argc, char* argv[]) {
                 zlog("realloced %u bytes\n", in_size);
             }
         }
-        inputs[i] = 0;
-        z_md5(inputs, sig);
+        z_md5(inputs, i-1, sig);
         free(inputs);
     }
     char *str = to_hex(sig, 16);

@@ -124,8 +124,9 @@ inline void ii(Uint32 *a, Uint32 b, Uint32 c, Uint32 d, Uint32 Mj, Uint32 s, Uin
 #define HH(a, b, c, d, Mj, s, ti) hh(&a, b, c, d, Mj, s, ti)
 #define II(a, b, c, d, Mj, s, ti) ii(&a, b, c, d, Mj, s, ti)
 
-void z_md5(const char* content, Uint8* result) {
-    Uint32 len = strlen(content);
+void z_md5(const char* content, Uint32 len, Uint8* result) {
+    //Uint32 len = strlen(content);
+    printf("len=%d\n", len);
     // 64 byte == 512 bit
     Uint32 remain = len%64;
     int n_block = len/64 + 1;
