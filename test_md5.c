@@ -25,14 +25,6 @@ void test_bit() {
     // right shift, unsigned padding 0, signed pading 1
 }
 
-void test_math() {
-    int i = 10;
-    printf("Uint32 t[] = {\n");
-    for (i=0;i<=65;i++) {
-        int c = get_ti(i);
-        printf("[%d] = 0x%08x,\n", i, c);
-    }
-}
 
 char* to_hex(Uint8 *data, size_t len) {
     // 2 byte display for 1 byte data
@@ -52,7 +44,6 @@ int main(int argc, char* argv[]) {
     //zlog("HEEEL\n");
     //test_bit();
     //test_endian();
-    //test_math();
     printf("argc=%d\n", argc);
     Uint8 sig[16] = {0};
     if (argc>1) {
