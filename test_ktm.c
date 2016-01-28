@@ -19,6 +19,7 @@ char* to_hex(Uint8 *data, size_t len) {
 }
 
 int main(int argc, char* argv[]) {
+    zlog("HELLO\n");
     return 0;
 }
 
