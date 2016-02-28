@@ -59,16 +59,15 @@ class Loan {
             $total_interest = 0;
             for ($i=1;$i<=$months;$i++) {
                 $interest = round(($loan_amount-$returned_capital)*$month_rate, 2);
-                $month_pays []= $month_capital + $interest;
-                echo "$month_capital+$interest\n";
+                $month_pays []= array($month_capital, $interest);
                 $total_interest += $interest;
                 $returned_capital += $month_capital;
             }
-            $total_pay = $total_interest + $pay;
+            $total_pay = $total_interest + $loan_amount;
             echo "total:$total_pay, monthly:\n";
             $month = 1;
             foreach ($month_pays as $month_pay) {
-                echo "$month: $month_pay\n";
+                echo "$month: $month_pay[0]+$month_pay[1] = ".($month_pay[0]+$month_pay[1])."\n";
                 $month++;
             }
         } else {
@@ -78,6 +77,14 @@ class Loan {
             $total_pay = $month_pay * $months;
             $month_pay = round($month_pay, 2);
             $total_pay = round($total_pay, 2);
+            /* 每个月的多少利息多少本金显示 */
+            $returned_capital = 0;
+            for ($i=1;$i<=$months;$i++) {
+                $month_interest = round(($loan_amount-$returned_capital)*$month_rate, 2);
+                $month_capital = $month_pay - $month_interest;
+                $returned_capital += $month_capital;
+                echo "$i: $month_pay = $month_capital + $month_interest\n";
+            }
             echo "total:$total_pay, monthly:$month_pay*$months, rate:$rate month_rate:$month_rate, roll_rate:$month_roll_rate\n";
         }
     }
@@ -87,4 +94,5 @@ $h1 = new HousePrice(313, true);
 #$h1->calculateDownPayment();
 $loan = new Loan(1850000, 20);
 $loan->calculationMonthPayment(false);
+$loan->calculationMonthPayment(true);
 
