@@ -18,6 +18,10 @@ tk_objs= test_ktm.o ketama.o zlog.o zmd5.o
 test_ktm: ${tk_objs}
 	gcc -o t ${OPTS} ${tk_objs} -lm
 
+zlog:zlog.o
+	cp zlog.h include/zlog.h
+	ar -crv lib/libzlog.a zlog.o
+
 # phony 表示即使有clean这个文件也会执行命令
 .PHONY: clean
 clean:
