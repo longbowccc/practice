@@ -1,0 +1,8 @@
+
+server.c: web server
+user.c:   cgi command
+
+test:
+    curl "host:9003/user?id=1"
+
+
