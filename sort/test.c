@@ -1,7 +1,11 @@
 
 #include "zlog.h"
 #include "bubble_sort.h"
+#include "selection_sort.h"
 #include "insert_sort.h"
+#include "quick_sort.h"
+#include "merge_sort.h"
+#include "heap_sort.h"
 #include "gen_num.h"
 
 
@@ -28,7 +32,11 @@ void test_sort(size_t n, int seed) {
     size_t i = 0;
     zarr_i(arr, n);
     //bubble_sort(arr, n);
-    insert_sort(arr, n);
+    //selection_sort(arr, n);
+    //insert_sort(arr, n);
+    //quick_sort(arr, n);
+    //quick_sort(arr, n);
+    heap_sort(arr, n);
     zlog(">>>>>>>");
     zarr_i(arr, n);
     if (check_order(arr, n, 1)) {

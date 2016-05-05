@@ -1,28 +1,25 @@
 #include "zlog.h"
 #include "insert_sort.h"
 
-static inline void swap(int *i, int *j) {
-    int tmp = *i;
-    *i = *j;
-    *j = tmp;
-}
+/*
+ * insert sort: stable
+ */
 
 void insert_sort(int *arr, size_t len) {
     int i=0,j=0;
-    int min, idx_min;
-    for (i=0;i<len;i++) {
-        // find mininum
-        idx_min = i;
-        min = arr[i];
-        for (j=i+1;j<len;j++) {
-            if (arr[j] < min) {
-                idx_min = j;
-                min = arr[j];
+    int tmp;
+    for (i=0;i<len-1;i++) {
+        tmp = arr[i+1];
+        for (j=i;j>=0;j--) {
+            if (tmp < arr[j]) {
+                arr[j+1] = arr[j];
+            } else {
+                arr[j+1] = tmp;
+                break;
             }
         }
-        // swap mininum to first
-        if (idx_min != i) {
-            swap(&arr[i], &arr[idx_min]);
+        if (j < 0) {
+            arr[0] = tmp;
         }
     }
 }
